@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Learning WebGL!</title>
+    </head>
+    <body>
+        <canvas id="glCanvas" width=720 height=480></canvas>
+        <script id="shader-vs" type="x-shader-vertex">
+            attribute vec2 a_position;
+            uniform mat3 u_matrix;
+
+            void main() {
+                vec2 position = (vec3(a_position, 1) * u_matrix).xy;
+                gl_Position = vec4(position, 0, 1);
+            }
+        </script>
+        <script id="shader-fs" type="x-shader-fragment">
+            precision mediump float;
+
+            uniform vec4 u_color;
+
+            void main() {
+               gl_FragColor = u_color;
+            }
+        </script>
+        <script src="renderer.js"></script>
+    </body>
+</html>
