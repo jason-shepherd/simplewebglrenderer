@@ -5,7 +5,6 @@ function Renderer(canvas) {
 
     var objectsToDraw = [];
 
-    //TODO replace old code with new helper functions
     this.init = function() {
         program = new ShaderProgram(gl);
         program.createProgram("shader-vs", "shader-fs");
@@ -16,7 +15,6 @@ function Renderer(canvas) {
         objectsToDraw.push(object);
     }
 
-    //TODO replace old code with new helper functions
     this.render = function() {
         program.use();
 
@@ -37,14 +35,6 @@ function Drawable(verts, color) {
 
     this.setColor = function(r, g, b, a=255) {
         this.uniformData.u_color = new Float32Array([r/255, g/255, b/255, a/255]);
-    }
-
-    this.mulitplyMatrixBy = function(matrixToMultiply) {
-
-    }
-    
-    this.dotProduct = function(vector) {
-
     }
 
     this.scale = function(scaleX, scaleY) {
