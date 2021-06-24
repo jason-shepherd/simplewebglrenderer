@@ -1,17 +1,33 @@
-console.log(matrixMath.dotProduct([123, 456, 789], [987, 654, 321]));
-
 const canvas = document.querySelector('#glCanvas');
+
 r =  new Renderer(canvas);
 r.init();
 
-let obj1 = new Drawable(new Float32Array([-1, -1, -.5, 0, 0, -1]), new Float32Array([1, 0, 0, 1]));
-let obj2 = new Drawable(new Float32Array([0, 1, 1, 1, .5, 0]), new Float32Array([0, 0, 1, 1]));
-let obj3 = new Drawable(new Float32Array([-1, 1, -1, 0, 0, 1, 0, 0]), new Float32Array([.7, 0, 1, 1]));
+var player = new Drawable(new Float32Array([0, 0, 100, 0, 0, 100, 100, 100]), new Float32Array([1, 0, 0, 1]));
+r.toDraw(player);
+r.render(player);
 
-console.log(matrixMath.multiplyMat3([1, 2, 1, 0, 1, 0, 2, 3, 4], [2, 5, 1, 6, 7, 1, 1, 8, 1]));
+var position = {x:0, y:0};
+var speed = 5;
 
-obj1.setColor(Math.random()*255, Math.random()*255, Math.random()*255, 255);
-r.toDraw(obj1);
-r.toDraw(obj2);
-r.toDraw(obj3);
-r.render();
+document.addEventListener('keydown', (event) => {
+    switch(event.key) {
+        case 'w':
+            position.y -= speed;
+            break;
+        case 's':
+            position.y += speed;
+            break;
+        case 'd':
+            position.x += speed;
+            break;
+        case 'a':
+            position.x -= speed;
+            break;
+    }
+    
+    console.log(position);
+    player.translate(position.x, position.y);
+    r.render();
+});
+
