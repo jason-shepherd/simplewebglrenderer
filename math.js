@@ -30,7 +30,7 @@ var matrixMath = {
     multiplySeriesMat3: function(...matrices) {
         let product = matrices[0]
         for(let i = 1; i < matrices.length; i++) {
-           product = this.multiplyMat3(matrices[i], product);
+            product = this.multiplyMat3(product, matrices[i]);
         }
         return product;
     },
