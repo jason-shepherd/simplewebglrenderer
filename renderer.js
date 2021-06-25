@@ -14,12 +14,7 @@ function Renderer(canvas) {
             canvas.width = width;
             canvas.height = height;
         }
-        return {width: width, height: height};
     }
-
-    let screenDimensions = resizeCanvasToDisplay(canvas);
-    this.width = screenDimensions.width;
-    this.height = screenDimensions.height;
 
     this.init = function() {
         program = new ShaderProgram(gl);
@@ -32,13 +27,14 @@ function Renderer(canvas) {
     }
 
     this.render = function() {
+        resizeCanvasToDisplay(gl.canvas);
         program.use();
         
         gl.viewport(0,0, gl.canvas.width, gl.canvas.height);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         objectsToDraw.forEach((object) => {
-            object.computeTransformation(matrixMath.projectionMat3(this.width, this.height));
+            object.computeTransformation(matrixMath.projectionMat3(gl.canvas.width, gl.canvas.height));
 
             program.fillAttribs(object.attribData);
             program.fillUniforms(object.uniformData);
@@ -79,7 +75,9 @@ function Drawable(verts, color) {
     }
 
     this.computeTransformation = function(projection) {
-        this.uniformData.u_matrix = matrixMath.multiplySeriesMat3(projection, matrixMath.translateMat3(transform.position.x, transform.position.y),
-                                                                  matrixMath.rotateMat3(transform.rotation), matrixMath.scaleMat3(transform.scale.x, transform.scale.y));
+        this.uniformData.u_matrix = matrixMath.multiplySeriesMat3(projection, 
+                                                                  matrixMath.translateMat3(transform.position.x, transform.position.y),
+                                                                  matrixMath.rotateMat3(transform.rotation),
+                                                                  matrixMath.scaleMat3(transform.scale.x, transform.scale.y));
     }
 }

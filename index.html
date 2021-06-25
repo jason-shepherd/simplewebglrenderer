@@ -10,8 +10,7 @@
             uniform mat3 u_matrix;
 
             void main() {
-                vec2 position = (vec3(a_position, 1) * u_matrix).xy;
-                gl_Position = vec4(position, 0, 1);
+                gl_Position = vec4((u_matrix * vec3(a_position, 1)).xy, 0, 1);
             }
         </script>
         <script id="shader-fs" type="x-shader-fragment">
