@@ -5,6 +5,13 @@
     </head>
     <body>
         <canvas id="glCanvas" width=720 height=480></canvas>
+
+        <input type="range" min="50" max="800" value="0" id="xSlider" oninput="translateX(parseInt(this.value))"></input>
+        <input type="range" min="50" max="800" value="0" id="ySlider" oninput="translateY(parseInt(this.value))"></input>
+        <input type="range" min="1" max="10" step=".01" value="0" id="xScaleSlider" oninput="scaleX(parseFloat(this.value))"></input>
+        <input type="range" min="1" max="10" step=".01" value="0" id="yScaleSlider" oninput="scaleY(parseFloat(this.value))"></input>
+        <input type="range" min="0" max="360" value="0" id="rotationSlider" oninput="rotate(parseInt(this.value))"></input>
+
         <script id="shader-vs" type="x-shader-vertex">
             attribute vec2 a_position;
             uniform mat3 u_matrix;
