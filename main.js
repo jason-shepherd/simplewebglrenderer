@@ -18,7 +18,7 @@ const xScaleSlider = document.getElementById("xScaleSlider");
 const yScaleSlider = document.getElementById("yScaleSlider");
 const rotationSlider = document.getElementById("rotationSlider");
 
-var x=0, y=0, xScale=1, yScale=1, rotation=0;
+var x=50, y=50, xScale=1, yScale=1, rotation=0;
 
 //Slider on input functions
 function scaleX(value) {
